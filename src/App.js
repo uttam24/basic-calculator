@@ -1,23 +1,58 @@
-import logo from './logo.svg';
+import React,{useState} from 'react';
 import './App.css';
 
-function App() {
+const App=()=> {
+  const [valueA, setValueA] = useState(0);
+  const [valueB, setValueB] = useState(0);
+  const [operations, setOperations] = useState('+');
+  const [result, setResult] = useState(0);
+
+  const handleSubmit =()=>{
+    if(operations === '+'){
+      setResult(parseInt(valueA) + parseInt(valueB));
+    }
+    else if(operations === '-'){
+      setResult(parseInt(valueA) - parseInt(valueB));
+    }
+    else if(operations === '*'){
+      setResult(parseInt(valueA) * parseInt(valueB));
+    }
+    else if(operations === '/'){
+      setResult(parseInt(valueA) / parseInt(valueB));
+    }
+    else
+    {
+
+      alert('enter right value');
+
+    }
+  }
+
+  const setValuehanderA =(e)=>{
+    setValueA(e.target.value);
+  }
+
+  const setValuehanderB =(e)=>{
+    setValueB(e.target.value);
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <h1>Simple Calculator</h1>
+      <h3>{result}</h3>
+        <div>
+        <input type="text" value={valueA} onChange={setValuehanderA}/>
+        <input type="text" value={valueB} onChange={setValuehanderB}/>
+        <button onClick={handleSubmit} className='operation'>Submit</button>
+        </div>
+        <span>{operations}</span>
+        <div className="valueoperation">
+        <button onClick={()=>setOperations('+')}>+</button>
+        <button onClick={()=>setOperations('-')}>-</button>
+        <button onClick={()=>setOperations('*')}>*</button>
+        <button onClick={()=>setOperations('/')}>/</button>
+        </div>
     </div>
   );
 }
